@@ -1,11 +1,12 @@
 @{
     RootModule        = 'ADHealth.psm1'
-    ModuleVersion     = '2.1.0'
+    NestedModules     = @('ADHealth.Comparison.psm1')
+    ModuleVersion     = '2.2.0'
     GUID              = '8e6b9955-1d10-4eb3-892f-b4ea975f25dd'
     Author            = 'Dewald Pretorius'
     CompanyName       = 'Community'
     Copyright         = '(c) 2026 Dewald Pretorius. All rights reserved.'
-    Description       = 'Enterprise Active Directory health assessment and evidence framework.'
+    Description       = 'Enterprise Active Directory health assessment, live evidence, reporting, and baseline comparison framework.'
     PowerShellVersion = '5.1'
     FunctionsToExport = @(
         'New-AdhFinding',
@@ -13,7 +14,8 @@
         'Invoke-AdhAssessment',
         'Import-AdhSyntheticData',
         'Get-AdhLiveData',
-        'New-AdhHtmlReport'
+        'New-AdhHtmlReport',
+        'Compare-AdhAssessment'
     )
     CmdletsToExport   = @()
     VariablesToExport = @()

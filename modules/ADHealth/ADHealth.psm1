@@ -34,25 +34,27 @@ function New-AdhFinding {
     )
 
     [PSCustomObject]@{
-        FindingId     = [guid]::NewGuid().Guid
-        Check         = $Check
-        Title         = $Title
-        Severity      = $Severity
-        SeverityRank  = Get-AdhSeverityRank -Severity $Severity
-        Confidence    = $Confidence
-        Target        = $Target
-        Evidence      = $Evidence
-        Impact        = $Impact
+        FindingId      = [guid]::NewGuid().Guid
+        Check          = $Check
+        Title          = $Title
+        Severity       = $Severity
+        SeverityRank   = Get-AdhSeverityRank -Severity $Severity
+        Confidence     = $Confidence
+        Target         = $Target
+        Evidence       = $Evidence
+        Impact         = $Impact
         Recommendation = $Recommendation
-        Reference     = $Reference
-        ObservedAtUtc = [datetime]::UtcNow
+        Reference      = $Reference
+        ObservedAtUtc  = [datetime]::UtcNow
     }
 }
 
 function Import-AdhSyntheticData {
     [CmdletBinding()]
     param(
-        [Parameter(Mandatory)][ValidateScript({ Test-Path $_ -PathType Leaf })][string]$Path
+        [Parameter(Mandatory)]
+        [ValidateScript({ Test-Path $_ -PathType Leaf })]
+        [string]$Path
     )
 
     Get-Content -Path $Path -Raw -ErrorAction Stop | ConvertFrom-Json -ErrorAction Stop
@@ -94,7 +96,12 @@ function Invoke-AdhAssessment {
         $findings.Add((New-AdhFinding -Check 'IdentityHygiene' -Title 'Stale computer objects exceed threshold' -Severity Low -Confidence 85 -Evidence "$($Data.StaleObjects.ComputersOlderThanDays) computer object(s) older than 90 days" -Impact 'Stale identities increase administrative noise and may retain unnecessary access.' -Recommendation 'Validate ownership and last use, then follow the approved disable, quarantine, and deletion process.' -Target $Data.DomainName -Reference 'AD-HYGIENE-001'))
     }
 
-    $sortedFindings = @($findings | Sort-Object SeverityRank -Descending, Confidence -Descending)
+    $sortProperties = @(
+        @{ Expression = 'SeverityRank'; Descending = $true },
+        @{ Expression = 'Confidence'; Descending = $true }
+    )
+    $sortedFindings = @($findings | Sort-Object -Property $sortProperties)
+
     $summary = [PSCustomObject]@{
         ForestName    = $Data.ForestName
         DomainName    = $Data.DomainName

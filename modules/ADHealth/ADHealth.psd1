@@ -1,6 +1,6 @@
 @{
     RootModule        = 'ADHealth.psm1'
-    ModuleVersion     = '2.0.0'
+    ModuleVersion     = '2.1.0'
     GUID              = '8e6b9955-1d10-4eb3-892f-b4ea975f25dd'
     Author            = 'Dewald Pretorius'
     CompanyName       = 'Community'
@@ -11,7 +11,9 @@
         'New-AdhFinding',
         'Get-AdhSeverityRank',
         'Invoke-AdhAssessment',
-        'Import-AdhSyntheticData'
+        'Import-AdhSyntheticData',
+        'Get-AdhLiveData',
+        'New-AdhHtmlReport'
     )
     CmdletsToExport   = @()
     VariablesToExport = @()

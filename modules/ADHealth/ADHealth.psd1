@@ -1,7 +1,7 @@
 @{
-    RootModule        = 'ADHealth.psm1'
-    NestedModules     = @('ADHealth.Comparison.psm1')
-    ModuleVersion     = '2.2.0'
+    RootModule        = ''
+    NestedModules     = @('ADHealth.psm1','ADHealth.Comparison.psm1')
+    ModuleVersion     = '2.2.1'
     GUID              = '8e6b9955-1d10-4eb3-892f-b4ea975f25dd'
     Author            = 'Dewald Pretorius'
     CompanyName       = 'Community'

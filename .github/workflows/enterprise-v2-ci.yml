@@ -30,8 +30,7 @@ jobs:
 
       - name: Validate module manifest
         shell: pwsh
-        run: |
-          Test-ModuleManifest ./modules/ADHealth/ADHealth.psd1 -ErrorAction Stop
+        run: Test-ModuleManifest ./modules/ADHealth/ADHealth.psd1 -ErrorAction Stop
 
       - name: Parse PowerShell files
         shell: pwsh
@@ -65,11 +64,11 @@ jobs:
           Invoke-Pester -Configuration $configuration
 
       - name: Run synthetic assessment
-        shell: powershell
+        shell: pwsh
         run: |
-          powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\Invoke-ADHealthAssessmentV2.ps1 -OutputPath .\artifacts\ci-assessment
-          if (-not (Test-Path .\artifacts\ci-assessment\assessment.json)) { throw 'assessment.json was not created.' }
-          if (-not (Test-Path .\artifacts\ci-assessment\findings.csv)) { throw 'findings.csv was not created.' }
+          ./Invoke-ADHealthAssessmentV2.ps1 -OutputPath ./artifacts/ci-assessment
+          if (-not (Test-Path ./artifacts/ci-assessment/assessment.json)) { throw 'assessment.json was not created.' }
+          if (-not (Test-Path ./artifacts/ci-assessment/findings.csv)) { throw 'findings.csv was not created.' }
 
       - name: Upload validation evidence
         if: always()

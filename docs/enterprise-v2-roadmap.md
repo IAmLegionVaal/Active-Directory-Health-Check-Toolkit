@@ -4,6 +4,29 @@
 
 Transform the current read-only assessment script into a senior-level Active Directory operations and assurance toolkit suitable for multi-domain, multi-site, and multi-domain-controller environments.
 
+## Current implementation status
+
+Phase-one engineering has started on branch `upgrade/enterprise-v2`.
+
+Completed:
+
+- Versioned `ADHealth` PowerShell module and manifest
+- Normalized finding model with severity, confidence, evidence, impact, recommendation, target, reference, and UTC timestamp
+- Synthetic assessment engine covering controller reachability, replication, SYSVOL, time offset, DNS SRV validation, and stale computer objects
+- Clearly labelled synthetic AD dataset
+- Machine-readable JSON and CSV exports
+- Windows PowerShell 5.1 entry point
+- Pester tests
+- Windows GitHub Actions workflow with parser validation, PSScriptAnalyzer, Pester, synthetic assessment, and artifact upload
+
+Still required:
+
+- Live Active Directory collectors
+- Forest, domain, FSMO, topology, trust, privileged-group, and policy collectors
+- Enterprise HTML report and scorecards
+- Controlled AD lab validation
+- Baseline comparison and drift detection
+
 ## v2 architecture
 
 - Versioned PowerShell module with public and private functions

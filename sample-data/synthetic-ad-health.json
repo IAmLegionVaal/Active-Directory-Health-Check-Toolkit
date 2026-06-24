@@ -1,0 +1,29 @@
+{
+  "Classification": "SIMULATED PORTFOLIO DATA",
+  "ForestName": "corp.example.test",
+  "DomainName": "corp.example.test",
+  "DomainControllers": [
+    {
+      "Name": "DC01",
+      "Reachable": true,
+      "ReplicationFailures": 0,
+      "ReplicationFailureAgeHours": 0,
+      "SysvolReady": true,
+      "TimeOffsetSeconds": 2
+    },
+    {
+      "Name": "DC02",
+      "Reachable": true,
+      "ReplicationFailures": 3,
+      "ReplicationFailureAgeHours": 30,
+      "SysvolReady": false,
+      "TimeOffsetSeconds": 415
+    }
+  ],
+  "Dns": {
+    "SrvRecordFailures": 2
+  },
+  "StaleObjects": {
+    "ComputersOlderThanDays": 146
+  }
+}
